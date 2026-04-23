@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using ColossalFramework.Globalization;
 using ColossalFramework.Plugins;
+using static ColossalFramework.Globalization.Locale;
 
 namespace SleepyCommon
 {
@@ -123,10 +124,27 @@ namespace SleepyCommon
                                 string line;
                                 while ((line = reader.ReadLine()) is not null)
                                 {
-                                    string[] fields = CSVParser.Split(line);
-                                    if (fields.Length == 2)
+                                    line = line.Trim();
+                                    if (!string.IsNullOrEmpty(line) && line[0] != '#')
                                     {
-                                        locale.AddLocalizedString(new Locale.Key { m_Identifier = Trim(fields[0]) }, Trim(fields[1]));
+                                        string[] fields = CSVParser.Split(line);
+                                        if (fields.Length == 2)
+                                        {
+                                            string key = Trim(fields[0]);
+                                            string value = Trim(fields[1]);
+
+                                            if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
+                                            {
+                                                try
+                                                {
+                                                    locale.AddLocalizedString(new Locale.Key { m_Identifier = Trim(fields[0]) }, Trim(fields[1]));
+                                                }
+                                                catch (Exception e)
+                                                {
+                                                    CDebug.Log($"ERROR: Key: {key} Value: {value} - " + e.ToString());
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }

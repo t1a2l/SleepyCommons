@@ -16,6 +16,7 @@ namespace SleepyCommon
         public static KnownColor skyBlue => new KnownColor("Sky Blue", new Color32(0, 172, 234, 255));
         public static KnownColor cyan => new KnownColor("Cyan", Color.cyan);
         public static KnownColor green => new KnownColor("Green", Color.green);
+        public static KnownColor lightGreen => new KnownColor("Light Green", new Color(7f, 1.0f, 0.2f, 1f));
         public static KnownColor darkGreen => new KnownColor("Dark Green", new Color(0f, 0.7f, 0f, 1f));
         public static KnownColor brown => new KnownColor("Brown", new Color(0.72f, 0.5f, 0.34f, 1f));
         public static KnownColor yellow => new KnownColor("Yellow", Color.yellow);
@@ -55,6 +56,11 @@ namespace SleepyCommon
         public UnityEngine.Color color
         {
             get { return m_color; }
+        }
+
+        public override string ToString()
+        {
+            return m_name;
         }
     }
 }

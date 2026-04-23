@@ -1,4 +1,5 @@
 using ColossalFramework.UI;
+using System;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ namespace SleepyCommon
         protected abstract void UpdatePanel();
 
         // ----------------------------------------------------------------------------------------
-        public static T Instance
+        public static T? Instance
         {
             get
             {
@@ -74,7 +75,7 @@ namespace SleepyCommon
         {
             if (s_mainPanel is not null)
             {
-                Object.Destroy(s_mainPanel.gameObject);
+                UnityEngine.Object.Destroy(s_mainPanel.gameObject);
                 s_mainPanel = null;
             }
         }
@@ -121,6 +122,15 @@ namespace SleepyCommon
             }
 
             base.Update();
+        }
+
+        protected void FitToScreen()
+        {
+            Vector2 oScreenVector = UIView.GetAView().GetScreenResolution();
+            float fX = Math.Max(0.0f, Math.Min(absolutePosition.x, oScreenVector.x - width));
+            float fY = Math.Max(0.0f, Math.Min(absolutePosition.y, oScreenVector.y - height));
+            Vector3 oFitPosition = new Vector3(fX, fY, absolutePosition.z);
+            absolutePosition = oFitPosition;
         }
     }
 }

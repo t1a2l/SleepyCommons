@@ -218,7 +218,7 @@ namespace SleepyCommon
                 string sStatus = vehicle.Info.m_vehicleAI.GetLocalizedStatus(vehicleId, ref vehicle, out InstanceID newTarget);
                 if (!newTarget.IsEmpty)
                 {
-                    return InstanceHelper.DescribeInstance(newTarget, InstanceID.Empty);
+                    return InstanceHelper.DescribeInstance(newTarget, true, false);
                 }
                 else
                 {
@@ -231,7 +231,7 @@ namespace SleepyCommon
                                 NetNode node = NetNodes[target.Index];
                                 if (node.m_flags != 0 && node.m_transportLine != 0)
                                 {
-                                    return InstanceHelper.DescribeInstance(new InstanceID { TransportLine = node.m_transportLine }, InstanceID.Empty);
+                                    return InstanceHelper.DescribeInstance(new InstanceID { TransportLine = node.m_transportLine }, true, false);
                                 }
                                 break;
                             }
@@ -259,7 +259,7 @@ namespace SleepyCommon
                                             }
                                             else if ((vehicle.m_flags & Vehicle.Flags.Exporting) != 0)
                                             {
-                                                return InstanceHelper.DescribeInstance(target, InstanceID.Empty);
+                                                return InstanceHelper.DescribeInstance(target, true, false);
                                             }
                                             break;
                                         }
@@ -268,7 +268,7 @@ namespace SleepyCommon
                                             // Show target building rather than "Collecting Garbage" message.
                                             if (sStatus.Equals(Locale.Get("VEHICLE_STATUS_GARBAGE_COLLECT")))
                                             {
-                                                return InstanceHelper.DescribeInstance(target, InstanceID.Empty);
+                                                return InstanceHelper.DescribeInstance(target, true, false);
                                             }
                                             break;
                                         }
@@ -277,7 +277,7 @@ namespace SleepyCommon
                                             // Show target building rather than "Delivering Mail" message.
                                             if (sStatus.Equals(Locale.Get("VEHICLE_STATUS_POST_VEHICLE_DELIVER")))
                                             {
-                                                return InstanceHelper.DescribeInstance(target, InstanceID.Empty);
+                                                return InstanceHelper.DescribeInstance(target, true, false);
                                             }
                                             break;
                                         }
@@ -286,7 +286,7 @@ namespace SleepyCommon
                                             // Show target building rather than "Patrolling" message.
                                             if (sStatus.Equals(Locale.Get("VEHICLE_STATUS_POLICE_PATROL")))
                                             {
-                                                return InstanceHelper.DescribeInstance(target, InstanceID.Empty);
+                                                return InstanceHelper.DescribeInstance(target, true, false);
                                             }
                                             break;
                                         }
@@ -300,7 +300,7 @@ namespace SleepyCommon
             }
             else if (!target.IsEmpty)
             {
-                return InstanceHelper.DescribeInstance(target, InstanceID.Empty);
+                return InstanceHelper.DescribeInstance(target, true, false);
             }
 
             return Localization.Get("txtVehiclesNone");

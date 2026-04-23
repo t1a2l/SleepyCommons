@@ -22,7 +22,7 @@ namespace SleepyCommon
             return myDropDown;
         }
 
-        public UIPanel Panel
+        public UIPanel? Panel
         {
             get
             {
@@ -30,7 +30,7 @@ namespace SleepyCommon
             }
         }
 
-        public UIDropDown DropDown
+        public UIDropDown? DropDown
         {
             get
             {
@@ -38,7 +38,7 @@ namespace SleepyCommon
             }
         }
 
-        public UILabel Label
+        public UILabel? Label
         {
             get
             {

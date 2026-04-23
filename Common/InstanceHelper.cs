@@ -6,7 +6,7 @@ namespace SleepyCommon
 {
     public class InstanceHelper
     {
-        public static string DescribeInstance(InstanceID instance, InstanceID caller, bool bShowId = false)
+        public static string DescribeInstance(InstanceID instance, bool bShowTransport, bool bShowId)
         {
             if (instance.IsEmpty)
             {
@@ -20,7 +20,7 @@ namespace SleepyCommon
                         {
                             if (instance.Building != 0)
                             {
-                                string sName = CitiesUtils.GetBuildingName(instance.Building, caller, bShowId);
+                                string sName = CitiesUtils.GetBuildingName(instance.Building, bShowTransport, bShowId);
                                 if (string.IsNullOrEmpty(sName))
                                 {
                                     return "Building: #" + instance.Building;
@@ -80,7 +80,7 @@ namespace SleepyCommon
                                 ushort buildingId = NetNode.FindOwnerBuilding(instance.NetNode, 64f);
                                 if (buildingId != 0)
                                 {
-                                    string sName = CitiesUtils.GetBuildingName(buildingId, InstanceID.Empty);
+                                    string sName = CitiesUtils.GetBuildingName(buildingId, true, false);
                                     if (string.IsNullOrEmpty(sName))
                                     {
                                         return "Building: #" + instance.Building;

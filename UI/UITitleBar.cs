@@ -22,7 +22,9 @@ namespace SleepyCommon
         private UIDragHandle? m_drag = null;
 
         private List<UIButton> m_titleButtons = new List<UIButton>();
+        private UIComponent? m_tooltipComponent = null;
 
+        // ----------------------------------------------------------------------------------------
         public List<UIButton> Buttons 
         {
             get
@@ -53,6 +55,14 @@ namespace SleepyCommon
                     m_title.text = value;
                     m_title.position = new Vector3(this.width / 2f - m_title.width / 2f, -20f + m_title.height / 2f);
                 }
+            }
+        }
+
+        public UIComponent? tooltipComponent
+        {
+            get
+            {
+                return m_tooltipComponent;
             }
         }
 
@@ -129,6 +139,8 @@ namespace SleepyCommon
                 button.normalBgSprite = spriteName;
                 button.color = Color.white;
                 button.eventClick += handler;
+                button.eventTooltipEnter += OnTooltipEnter;
+                button.eventTooltipLeave += OnTooltipLeave;
 
                 m_titleButtons.Add(button);
                 m_fOffset += button.width;
@@ -155,6 +167,15 @@ namespace SleepyCommon
                 }
                 
             }
+        }
+
+        public void OnTooltipEnter(UIComponent component, UIMouseEventParameter eventParam) 
+        {
+            m_tooltipComponent = component;
+        }
+        public void OnTooltipLeave(UIComponent component, UIMouseEventParameter eventParam)
+        {
+            m_tooltipComponent = null;
         }
 
         public override void OnDestroy()

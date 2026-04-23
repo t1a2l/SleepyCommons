@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\Localization.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ResourceLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\TextureResources.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\TransportUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Utils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\VehicleTypeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\UserModBase.cs" />

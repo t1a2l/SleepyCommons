@@ -8,7 +8,7 @@ namespace SleepyCommon
         public UILabel? m_label = null;
         public UIPanel? m_content = null;
 
-        public UILabel label
+        public UILabel? label
         {
             get
             {
@@ -24,7 +24,7 @@ namespace SleepyCommon
                 uiGroup = parent.AddUIComponent<UIGroup>();
                 if (uiGroup is not null)
                 {
-                    uiGroup.padding = new RectOffset(0, 0, 4, 4);
+                    uiGroup.padding = new RectOffset(0, 0, 2, 2);
                     uiGroup.autoLayout = true;
                     uiGroup.autoLayoutDirection = LayoutDirection.Vertical;
                     uiGroup.autoLayoutPadding = new RectOffset(4, 4, 2, 2);
@@ -33,12 +33,15 @@ namespace SleepyCommon
                     uiGroup.height = height;
                     uiGroup.backgroundSprite = "InfoviewPanel";
                     //uiGroup.color = new Color32(96, 96, 96, 255);
-                    uiGroup.color = new Color32(116, 116, 116, 255);
+                    //uiGroup.color = new Color32(116, 116, 116, 255);
+                    uiGroup.color = new Color32(82, 90, 94, 192);
+
 
                     uiGroup.m_label = uiGroup.AddUIComponent<UILabel>();
                     uiGroup.m_label.text = text;
                     uiGroup.m_label.textScale = fTextScale;
                     uiGroup.m_label.opacity = 1.0f;
+                    uiGroup.m_label.padding.left = 10;
 
                     uiGroup.m_content = uiGroup.AddUIComponent<UIPanel>();
                     uiGroup.m_content.width = width;

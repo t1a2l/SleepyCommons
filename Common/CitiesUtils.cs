@@ -1,15 +1,16 @@
 using ColossalFramework;
 using ColossalFramework.Math;
 using System;
+using System.Security.Policy;
 using UnityEngine;
+using static SleepyCommon.TransportUtils;
 using static SleepyCommon.VehicleTypeHelper;
-using static TransferManager;
 
 namespace SleepyCommon
 {
     public static class CitiesUtils
     {
-        public static string GetBuildingName(ushort buildingId, InstanceID caller, bool bShowId = false)
+        public static string GetBuildingName(ushort buildingId, bool bShowTransport, bool bShowId)
         {
             string sName = "";
             if (buildingId != 0 && buildingId < BuildingManager.instance.m_buildings.m_size)
@@ -17,24 +18,41 @@ namespace SleepyCommon
                 Building building = BuildingManager.instance.m_buildings.m_buffer[buildingId];
                 if (building.m_flags != Building.Flags.None)
                 {
+                    if (bShowTransport)
+                    {
+                        TransportType transportType = TransportUtils.GetTransportType(building);
+                        if (transportType != TransportType.Road)
+                        {
+                            sName += $"[{GetTransportDescription(transportType)}] ";
+                        }
+                    }
+
                     if (building.m_parentBuilding != 0)
                     {
-                        sName += "(S) "; // Add an S for sub building.
+                        sName += "(S) "; // (S)ub building.
                     }
-                    sName += Singleton<BuildingManager>.instance.GetBuildingName(buildingId, caller);
-                    if (string.IsNullOrEmpty(sName))
+
+                    string buildingName = Singleton<BuildingManager>.instance.GetBuildingName(buildingId, new InstanceID { Building = buildingId });
+                    if (string.IsNullOrEmpty(buildingName) || buildingName.Contains("BUILDING_TITLE"))
                     {
-                        sName = $"Building: #{buildingId}";
-                    }
-                    else
-                    {
-#if DEBUG
-                        bShowId = true;
-#endif 
-                        if (bShowId)
+                        if (building.Info is not null && building.Info.m_class is not null)
                         {
-                            sName = $"#{buildingId}: {sName}";
+                            buildingName = $"{building.Info.m_class.name}";
                         }
+                        else
+                        {
+                            buildingName = $"Unknown";
+                        }
+
+                        bShowId = true;
+                    }
+                    sName += buildingName;
+#if DEBUG
+                    bShowId = true;
+#endif
+                    if (bShowId)
+                    {
+                        sName = $"#{buildingId}: {sName}";
                     }
 
                     return sName;
@@ -451,6 +469,12 @@ namespace SleepyCommon
             }
 
             return iPassengerCount;
+        }
+
+        public static bool IsOutsideConnectionNode(ushort nodeId)
+        {
+            NetNode node = NetManager.instance.m_nodes.m_buffer[nodeId];
+            return (node.m_flags & NetNode.Flags.Outside) != 0 && node.m_building != 0;
         }
     }
 }

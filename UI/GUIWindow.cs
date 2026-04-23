@@ -18,8 +18,6 @@ namespace SleepyCommon
         private static GUIWindow movingWindow;
         private static Vector2 moveDragHandle = Vector2.zero;
 
-        private static Texture2D highlightTexture;
-
         private static GUIStyle highlightstyle;
 
         private readonly int id;

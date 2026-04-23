@@ -145,6 +145,16 @@ namespace SleepyCommon
             return IsPluginRunning(928128676, "ImprovedPublicTransport2");
         }
 
+        public static bool IsMoreTransferReasonsRunning()
+        {
+            return IsPluginRunning(2980644460, "MoreTransferReasons");
+        }
+
+        public static bool IsPrisonHelicopterRunning()
+        {
+            return IsPluginRunning(2559039910, "PrisonHelicopter");
+        }
+
         public static bool IsNaturalDisastersDLC()
         {
             if (s_bNaturalDisastersDlcOwned is null)

@@ -28,6 +28,7 @@ namespace SleepyCommon
             PassengerTrain,
             MetroTrain,
             Bus,
+            CableCar,
             SnowPlow,
             CruiseShip,
             DisasterResponseTruck,
@@ -98,6 +99,10 @@ namespace SleepyCommon
                             case ItemClass.SubService.PublicTransportMonorail:
                                 {
                                     return VehicleType.Monorail;
+                                }
+                            case ItemClass.SubService.PublicTransportCableCar:
+                                {
+                                    return VehicleType.CableCar;
                                 }
                         }
                         break;

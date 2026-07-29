@@ -10,7 +10,7 @@ namespace SleepyCommon
         {
             if (instance.IsEmpty)
             {
-                return "Empty";
+                return "";
             } 
             else 
             {
@@ -66,33 +66,36 @@ namespace SleepyCommon
                             }
                             else
                             {
-#if DEBUG
-                                return $"({instance.Park}) " + sName;
-#else
-                                 return sName;
-#endif
+                                return sName;
                             }
                         }
                     case InstanceType.NetNode:
                         {
                             if (instance.NetNode > 0 && instance.NetNode < NetManager.instance.m_nodes.m_size)
                             {
+                                
                                 ushort buildingId = NetNode.FindOwnerBuilding(instance.NetNode, 64f);
                                 if (buildingId != 0)
                                 {
+                                    string sText = "";
+                                    if (bShowId)
+                                    {
+                                        sText += $"NetNode: #{instance.Index} ";
+                                    }
+
                                     string sName = CitiesUtils.GetBuildingName(buildingId, true, false);
                                     if (string.IsNullOrEmpty(sName))
                                     {
-                                        return "Building: #" + instance.Building;
+                                        return $"{sText}Building: #{instance.Building}";
                                     }
                                     else
                                     {
-                                        return sName;
+                                        return $"{sText}{sName}";
                                     }
                                 }
                             }
 
-                            return instance.Type.ToString() + ": " + instance.Index;
+                            return instance.Type.ToString() + ": #" + instance.Index;
                         }
                     case InstanceType.TransportLine:
                         {
@@ -105,11 +108,11 @@ namespace SleepyCommon
                                 }
                             }
 
-                            return instance.Type.ToString() + ": " + instance.Index;
+                            return instance.Type.ToString() + ": #" + instance.Index;
                         }
                     default:
                         {
-                            return instance.Type.ToString() + ": " + instance.Index;
+                            return instance.Type.ToString() + ": #" + instance.Index;
                         }
                 }
             }

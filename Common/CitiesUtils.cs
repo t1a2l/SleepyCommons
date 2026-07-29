@@ -303,6 +303,7 @@ namespace SleepyCommon
                             case VehicleType.Monorail:
                             case VehicleType.Ferry:
                             case VehicleType.Tram:
+                            case VehicleType.CableCar:
                                 {
                                     current = VehicleTypeHelper.GetVehiclePassengerCount(vehicleId, out max);
                                     return $"{current} / {max}";
@@ -399,7 +400,7 @@ namespace SleepyCommon
                         Vector3.SqrMagnitude(building.m_position - position) < 2500f)
                     {
 #if DEBUG
-                        CDebug.Log($"IsNearOutsideConnection: {position} Near outside connection: {outsideConnectionId}");
+                        Log.Info($"IsNearOutsideConnection: {position} Near outside connection: {outsideConnectionId}");
 #endif
                         return true;
                     }
@@ -461,7 +462,7 @@ namespace SleepyCommon
                         num7 = nextGridInstance;
                         if (++num8 > 65536)
                         {
-                            CDebug.Log("Invalid list detected!\n" + Environment.StackTrace);
+                            Log.Error("Invalid list detected!");
                             break;
                         }
                     }

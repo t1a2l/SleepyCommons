@@ -1,5 +1,4 @@
-﻿using SleepyCommon;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
@@ -197,7 +196,7 @@ namespace SleepyCommon
             } 
             catch (Exception ex) 
             {
-                CDebug.Log(ex);
+                Log.Error(ex);
             }
         }
 
@@ -270,7 +269,7 @@ namespace SleepyCommon
                 }
                 
             } catch(Exception ex) {
-                CDebug.Log(ex);
+                Log.Error(ex);
             }
         }
 

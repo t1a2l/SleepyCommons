@@ -98,7 +98,7 @@ namespace SleepyCommon
             }
             catch (Exception e)
             {
-                CDebug.Log("Unable to pad text", e);
+                Log.Error("Unable to pad text", e);
             }
             return fWidth;
         }

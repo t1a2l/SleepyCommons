@@ -90,7 +90,7 @@ namespace SleepyCommon
                     prompt();
                 }
             } catch (Exception e) {
-                CDebug.Log(e);
+                Log.Error(e);
             }
         }
 
@@ -132,7 +132,7 @@ namespace SleepyCommon
                     prompt();
                 }
             } catch (Exception e) {
-                CDebug.Log(e);
+                Log.Error(e);
             }
         }
     }

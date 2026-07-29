@@ -21,7 +21,7 @@ namespace SleepyCommon
                         throw new Exception($"Resource stream {resourceName} not found!");
                     }
 
-                    CDebug.LogError("Resource " + resourceName + " not found (not an error)");
+                    Log.Error("Resource " + resourceName + " not found (not an error)");
                     return null;
                 }
 
@@ -37,7 +37,7 @@ namespace SleepyCommon
             }
             catch (Exception e)
             {
-                CDebug.Log("Failed to load resources", e);
+                Log.Error("Failed to load resources", e);
                 return null;
             }
         }
@@ -85,7 +85,7 @@ namespace SleepyCommon
             }
             catch (Exception e)
             {
-                CDebug.Log(e);
+                Log.Error("Unable to read to end",e);
                 return null;
             }
             finally

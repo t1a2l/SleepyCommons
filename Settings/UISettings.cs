@@ -10,6 +10,11 @@ namespace SleepyCommon
             return AddDescription(parent.self as UIPanel, name, parent.self as UIPanel, fontScale, text);
         }
 
+        public static UILabel AddDescription(UIComponent panel, string name, float fontScale, string text)
+        {
+            return AddDescription(panel, name, panel, fontScale, text);
+        }
+
         public static UILabel AddDescription(UIHelper parent, string name, UIComponent alignTo, float fontScale, string text)
         {
             return AddDescription(parent.self as UIPanel, name, parent.self as UIPanel, fontScale, text);

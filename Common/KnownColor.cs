@@ -11,7 +11,7 @@ namespace SleepyCommon
         public static KnownColor red => new KnownColor("Red", Color.red);
         public static KnownColor magenta => new KnownColor("Magenta", Color.magenta);
         public static KnownColor blue => new KnownColor("Blue", Color.blue);
-        public static KnownColor navy => new KnownColor("Navy", new Color(0f, 0.5f, 0f, 1f));
+        public static KnownColor navy => new KnownColor("Navy", new Color(0f, 0f, 0.5f, 1f));
         public static KnownColor lightBlue => new KnownColor("Light Blue", new Color(0f, 0.8f, 1f, 1f));
         public static KnownColor skyBlue => new KnownColor("Sky Blue", new Color32(0, 172, 234, 255));
         public static KnownColor cyan => new KnownColor("Cyan", Color.cyan);

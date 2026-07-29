@@ -1,6 +1,10 @@
 ﻿using ColossalFramework.Plugins;
+using ColossalFramework.UI;
+using ICities;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
 namespace SleepyCommon
 {
@@ -9,14 +13,36 @@ namespace SleepyCommon
         private static Dictionary<long, bool> s_pluginRunning = new Dictionary<long, bool>();
         private static bool? s_bNaturalDisastersDlcOwned = null;
 
-        public static void SearchPlugins()
+        public static void LogPlugins()
         {
             string sPlugins = "";
             foreach (PluginManager.PluginInfo oPlugin in PluginManager.instance.GetPluginsInfo())
             {
-                sPlugins += oPlugin.name + " " + oPlugin.GetHashCode() + "\r\n";
+                sPlugins += "\n    ";
+                if (oPlugin.isEnabled)
+                {
+                    sPlugins += "* ";
+                }
+                else
+                {
+                    sPlugins += "  ";
+                }
+                    
+                sPlugins += oPlugin.name;
+
+                if (oPlugin.userModInstance is not null)
+                {
+                    sPlugins += $" {((IUserMod)oPlugin.userModInstance).Name}"; 
+                }
+                else
+                {
+                    Log.Error("Mod instance is null");
+                }
             }
-            CDebug.Log(sPlugins);
+
+            Log.Info("Loaded Mods");
+            Log.Separator();
+            Log.Info(sPlugins);
         }
 
         public static bool IsPluginRunningNotCached(long pluginId, string sAssemblyName)

@@ -1,3 +1,5 @@
+using System;
+using ColossalFramework;
 using ICities;
 
 namespace SleepyCommon
@@ -116,9 +118,44 @@ namespace SleepyCommon
             return TransportType.None;
         }
 
+        // -------------------------------------------------------------------------------------------
         public static string GetTransportDescription(TransportType type)
         {
             return Localization.Get($"TransportType{type}");
+        }
+
+        // -------------------------------------------------------------------------------------------
+        public static int GetStopNumber(ushort lineId, ushort nodeId)
+        {
+            TransportLine oLine = TransportManager.instance.m_lines.m_buffer[lineId];
+            if (oLine.m_flags != 0)
+            {
+                // Enumerate stops
+                int iLoopCount = 0;
+                ushort firstStop = oLine.m_stops;
+                ushort stop = firstStop;
+                while (stop != 0)
+                {
+                    if (stop == nodeId)
+                    {
+                        return iLoopCount + 1;
+                    }
+
+                    stop = TransportLine.GetNextStop(stop);
+                    if (stop == firstStop)
+                    {
+                        break;
+                    }
+
+                    if (++iLoopCount >= 32768)
+                    {
+                        CODebugBase<LogChannel>.Error(LogChannel.Core, "Invalid list detected!\n" + Environment.StackTrace);
+                        break;
+                    }
+                }
+            }
+
+            return 0;
         }
     }
 }

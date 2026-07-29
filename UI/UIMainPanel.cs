@@ -30,7 +30,7 @@ namespace SleepyCommon
                     s_mainPanel = (T) UIView.GetAView().AddUIComponent(typeof(T));
                     if (s_mainPanel is null)
                     {
-                        CDebug.Log("Error: creating Panel.");
+                        Log.Error("Error: creating Panel.");
                     }
                 }
 

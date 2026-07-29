@@ -173,6 +173,7 @@ namespace SleepyCommon
         {
             m_tooltipComponent = component;
         }
+
         public void OnTooltipLeave(UIComponent component, UIMouseEventParameter eventParam)
         {
             m_tooltipComponent = null;

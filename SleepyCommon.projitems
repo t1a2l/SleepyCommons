@@ -13,9 +13,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\CitizenUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Debug.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\DependencyUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\HashSetExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\InstanceHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\KnownColor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Localization.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Log.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ResourceLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\TextureResources.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\TransportUtils.cs" />

@@ -10,11 +10,11 @@ namespace SleepyCommon
         {
             if (bAddCallingFunction)
             {
-                UnityEngine.Debug.Log($"[{UserModBase.BaseInstance.Name}] {GetCallingFunction()}: {sText}");
+                UnityEngine.Debug.Log($"[{GetModuleName()}] {GetCallingFunction()}: {sText}");
             }
             else
             {
-                UnityEngine.Debug.Log($"[{UserModBase.BaseInstance.Name}]: {sText}");
+                UnityEngine.Debug.Log($"[{GetModuleName()}]: {sText}");
             }
         }
 
@@ -22,13 +22,24 @@ namespace SleepyCommon
         {
             if (bAddCallingFunction)
             {
-                UnityEngine.Debug.LogError($"[{UserModBase.BaseInstance.Name}] {GetCallingFunction()}: {sText}");
+                UnityEngine.Debug.LogError($"[{GetModuleName()}] {GetCallingFunction()}: {sText}");
             }
             else
             {
-                UnityEngine.Debug.LogError($"[{UserModBase.BaseInstance.Name}]: {sText}");
+                UnityEngine.Debug.LogError($"[{GetModuleName()}]: {sText}");
             }
-            
+        }
+
+        public static void LogWarning(string sText, bool bAddCallingFunction = true)
+        {
+            if (bAddCallingFunction)
+            {
+                UnityEngine.Debug.LogWarning($"[{GetModuleName()}] {GetCallingFunction()}: {sText}");
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning($"[{GetModuleName()}]: {sText}");
+            }
         }
 
         public static void Log(Exception ex)
@@ -45,6 +56,21 @@ namespace SleepyCommon
             {
                 UnityEngine.Debug.LogException(ex.InnerException);
             }
+        }
+
+        private static string GetModuleName()
+        {
+            string sModuleName;
+            if (UserModBase.BaseInstance is not null)
+            {
+                sModuleName = UserModBase.BaseInstance.Name;
+            }
+            else
+            {
+                sModuleName = Assembly.GetExecutingAssembly().GetName().Name;
+            }
+
+            return sModuleName;
         }
 
         public static string GetCallingFunction()

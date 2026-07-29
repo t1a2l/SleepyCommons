@@ -98,7 +98,7 @@ namespace SleepyCommon
             {
                 if (m_panel is not null)
                 {
-                    CDebug.Log("m_panel.isVisible: " + m_panel.isVisible);
+                    Log.Error("m_panel.isVisible: " + m_panel.isVisible);
                     return m_panel.isVisible;
                 }
                 return false;

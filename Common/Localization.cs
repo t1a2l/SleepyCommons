@@ -30,7 +30,7 @@ namespace SleepyCommon
             string sText = GetValue(sKey);
             if (string.IsNullOrEmpty(sText) || sText.Contains(sKey))
             {
-                CDebug.Log("LOCALIZATION Couldn't find: " + sKey);
+                Log.Error("LOCALIZATION Couldn't find: " + sKey);
             }
             sText = sText.Replace("\\r\\n", "\r\n");
             return sText;
@@ -93,11 +93,11 @@ namespace SleepyCommon
                         }
                     }
                 }
-                CDebug.Log("Locales loaded: " + s_localeStore.Count);
+                Log.Info("Locales loaded: " + s_localeStore.Count);
             }
             else
             {
-                CDebug.Log("Locales directory not found: " + LocalePath());
+                Log.Error("Locales directory not found: " + LocalePath());
             }
 
             // Load en from resources so we have at least 1 language
@@ -115,7 +115,7 @@ namespace SleepyCommon
                 Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
                 try
                 {
-                    using (FileStream fileStream = File.OpenRead(file)) 
+                    using (FileStream fileStream = File.OpenRead(file))
                     {
                         if (fileStream is not null)
                         {
@@ -139,9 +139,9 @@ namespace SleepyCommon
                                                 {
                                                     locale.AddLocalizedString(new Locale.Key { m_Identifier = Trim(fields[0]) }, Trim(fields[1]));
                                                 }
-                                                catch (Exception e)
+                                                catch (Exception ex)
                                                 {
-                                                    CDebug.Log($"ERROR: Key: {key} Value: {value} - " + e.ToString());
+                                                    Log.Error($"Key: {key} Value: {value}", ex);
                                                 }
                                             }
                                         }
@@ -151,14 +151,14 @@ namespace SleepyCommon
                         }
                         else
                         {
-                            CDebug.LogError("Unable to open localization file: " + file);
+                            Log.Error("Unable to open localization file: " + file);
                         }
                     }
-                    
+
                 }
                 catch (Exception e)
                 {
-                    CDebug.LogError("Unable to load localization file: " + file + " Error: " + e.ToString());
+                    Log.Error($"Unable to load localization file: {file} ", e);
                 }
             }
 
@@ -190,7 +190,7 @@ namespace SleepyCommon
                 }
                 else
                 {
-                    CDebug.Log("Resource locale file not found.");
+                    Log.Info("Resource locale file not found.");
                 }
             }
 

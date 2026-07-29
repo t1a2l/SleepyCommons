@@ -44,7 +44,7 @@ namespace SleepyCommon
             }
             catch (Exception e)
             {
-                CDebug.Log("CreateTextureAtlas", e);
+                Log.Error("CreateTextureAtlas", e);
             }
             return null;
         }

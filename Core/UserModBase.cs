@@ -1,4 +1,5 @@
 using ICities;
+using System;
 using System.Reflection;
 
 namespace SleepyCommon
@@ -15,9 +16,9 @@ namespace SleepyCommon
             BaseInstance = this;
         }
 
-        public abstract string ModName { get; }
+        public abstract string BaseModName { get; }
 
-        public abstract string Version { get; }
+        public abstract string ModName { get; }
 
         public abstract string Description { get; }
 
@@ -32,6 +33,15 @@ namespace SleepyCommon
             }
         }
 
+        public string Version
+        {
+            get
+            {
+                Version version = Assembly.GetExecutingAssembly().GetName().Version;
+                return $"v{version.Major}.{version.Minor}.{version.Build}";
+            }
+        }
+
         public string SleepyCommonVersion 
         {
             get
@@ -40,14 +50,15 @@ namespace SleepyCommon
             }
         }
 
-
-        public void OnEnabled()
+        public virtual void OnEnabled()
         {
+            Log.Info($"OnEnabled: {Name}");
             IsEnabled = true;
         }
 
-        public void OnDisabled()
+        public virtual void OnDisabled()
         {
+            Log.Info("OnDisabled");
             IsEnabled = false;
         }
 
@@ -56,8 +67,8 @@ namespace SleepyCommon
         {
             if (ActiveInMode(mode))
             {
+                Log.Info("OnLevelLoaded");
                 IsLoaded = true;
-
                 OnLevelLoaded();
             }
         }
@@ -65,7 +76,7 @@ namespace SleepyCommon
         // called when unloading begins
         public override void OnLevelUnloading()
         {
-            CDebug.Log("OnLevelUnloading");
+            Log.Info("OnLevelUnloading");
             IsLoaded = false;
             base.OnLevelUnloading();
         }

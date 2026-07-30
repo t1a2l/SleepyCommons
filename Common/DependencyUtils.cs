@@ -181,6 +181,12 @@ namespace SleepyCommon
             return IsPluginRunning(2559039910, "PrisonHelicopter");
         }
 
+        public static bool IsIndustriesMeetsSunsetHarborRunning()
+        {
+            // We look for either steam ID or IndustriesMeetsSunsetHarbor assembly name
+            return IsPluginRunningNotCached(2918052073, "IndustriesMeetsSunsetHarbor");
+        }
+
         public static bool IsNaturalDisastersDLC()
         {
             if (s_bNaturalDisastersDlcOwned is null)
